@@ -1,0 +1,25 @@
+server.port: 8080
+spring:
+  application:
+    name: canary-test-gateway
+  cloud:
+    gateway:
+      routes:
+
+      - id: service1_v1
+        uri: http://localhost:8081/v1
+        predicates:
+        - Path=/s
+        - Weight=group1, 9
+
+      - id: service1_v2
+        uri: http://localhost:8081/v2
+        predicates:
+        - Weight=group1, 1
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG

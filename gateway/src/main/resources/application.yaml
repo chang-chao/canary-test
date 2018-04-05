@@ -10,12 +10,13 @@ spring:
         uri: http://localhost:8081/v1
         predicates:
         - Path=/s
-        - Weight=group1, 9
+        - Weight=service1, 95
 
       - id: service1_v2
         uri: http://localhost:8081/v2
         predicates:
-        - Weight=group1, 1
+        - Path=/s
+        - Weight=service1, 5
 
 logging:
   level:
